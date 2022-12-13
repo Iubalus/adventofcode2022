@@ -56,6 +56,27 @@ class Day2Test {
     }
 
     @Test
+    fun specialLookup_whenIPlayRock_IMustLose() {
+        assertEquals(Day2().specialLookup("ROCK", "ROCK"), "SCISSORS");
+        assertEquals(Day2().specialLookup("PAPER", "ROCK"), "ROCK");
+        assertEquals(Day2().specialLookup("SCISSORS", "ROCK"), "PAPER");
+    }
+
+    @Test
+    fun specialLookup_whenIPlayPaper_IMustDraw() {
+        assertEquals(Day2().specialLookup("ROCK", "PAPER"), "ROCK");
+        assertEquals(Day2().specialLookup("PAPER", "PAPER"), "PAPER");
+        assertEquals(Day2().specialLookup("SCISSORS", "PAPER"), "SCISSORS");
+    }
+
+    @Test
+    fun specialLookup_whenIPlayScissors_IMustWin() {
+        assertEquals(Day2().specialLookup("ROCK", "SCISSORS"), "PAPER");
+        assertEquals(Day2().specialLookup("PAPER", "SCISSORS"), "SCISSORS");
+        assertEquals(Day2().specialLookup("SCISSORS", "SCISSORS"), "ROCK");
+    }
+
+    @Test
     fun integration_sumsWithRawInput() {
         assertEquals(Day2().rockPaperScissorsScore(listOf("A X", "A X")), 8)
     }

@@ -4,6 +4,7 @@ class Day2 {
     val lookup: HashMap<String, String> = HashMap();
     val playValue: HashMap<String, Int> = HashMap();
     val defeatLookup: HashMap<String, String> = HashMap();
+    val victoryLookup: HashMap<String, String> = HashMap();
 
     init {
         lookup["X"] = "ROCK";
@@ -17,7 +18,10 @@ class Day2 {
         playValue["SCISSORS"] = 3;
         defeatLookup["ROCK"] = "PAPER";
         defeatLookup["PAPER"] = "SCISSORS";
-        defeatLookup["SCISSORS"] = "ROCK"
+        defeatLookup["SCISSORS"] = "ROCK";
+        victoryLookup["ROCK"] = "SCISSORS";
+        victoryLookup["PAPER"] = "ROCK";
+        victoryLookup["SCISSORS"] = "PAPER";
     }
 
     fun draw(left: String, right: String): Int {
@@ -32,6 +36,16 @@ class Day2 {
         return (playValue[right] ?: 0) + draw(left, right) + win(left, right);
     }
 
+    fun specialLookup(left: String, right: String): String {
+        if (right == "ROCK") {
+            return victoryLookup[left] ?: "";
+        }
+        if(right == "SCISSORS"){
+            return defeatLookup[left] ?: "";
+        }
+        return left;
+    }
+
     fun rockPaperScissorsScore(lines: List<String>): Int {
         return lines
             .map { line -> line.split(" ") }
@@ -39,9 +53,17 @@ class Day2 {
             .reduce { l, r -> l + r }
     }
 
+    fun rockPaperScissorsPart2(lines: List<String>): Int {
+        return lines
+            .map { line -> line.split(" ") }
+            .map { v -> scoreMatch(lookup[v[0]] ?: "", specialLookup(lookup[v[0]] ?: "", lookup[v[1]] ?: "")) }
+            .reduce { l, r -> l + r }
+    }
+
 }
 
 fun main(args: Array<String>) {
     val input = Day2::class.java.getResourceAsStream("/day2/input.txt")?.bufferedReader()?.readLines()
-    print(Day2().rockPaperScissorsScore(input?: listOf("")))
+    println(Day2().rockPaperScissorsScore(input ?: listOf("")))
+    println(Day2().rockPaperScissorsPart2(input ?: listOf("")))
 }
