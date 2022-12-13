@@ -3,8 +3,7 @@ package day2
 class Day2 {
     val lookup: HashMap<String, String> = HashMap();
     val playValue: HashMap<String, Int> = HashMap();
-    val defeatLookup: HashMap<String, String> = HashMap();
-    val victoryLookup: HashMap<String, String> = HashMap();
+    val cycle = listOf("ROCK", "SCISSORS", "PAPER")
 
     init {
         lookup["X"] = "ROCK";
@@ -16,12 +15,18 @@ class Day2 {
         playValue["ROCK"] = 1;
         playValue["PAPER"] = 2;
         playValue["SCISSORS"] = 3;
-        defeatLookup["ROCK"] = "PAPER";
-        defeatLookup["PAPER"] = "SCISSORS";
-        defeatLookup["SCISSORS"] = "ROCK";
-        victoryLookup["ROCK"] = "SCISSORS";
-        victoryLookup["PAPER"] = "ROCK";
-        victoryLookup["SCISSORS"] = "PAPER";
+    }
+
+    private fun lookupDefeat(value: String): String {
+        var i = cycle.indexOf(value);
+        i = if (i == 0) cycle.size - 1 else i - 1;
+        return cycle[i];
+    }
+
+    private fun lookupVictory(value: String): String {
+        var i = cycle.indexOf(value);
+        i = (i + 1) % cycle.size;
+        return cycle[i];
     }
 
     fun draw(left: String, right: String): Int {
@@ -29,7 +34,7 @@ class Day2 {
     }
 
     fun win(left: String, right: String): Int {
-        return if (defeatLookup[left] == right) 6 else 0
+        return if (lookupDefeat(left) == right) 6 else 0
     }
 
     fun scoreMatch(left: String, right: String): Int {
@@ -38,10 +43,10 @@ class Day2 {
 
     fun specialLookup(left: String, right: String): String {
         if (right == "ROCK") {
-            return victoryLookup[left] ?: "";
+            return lookupVictory(left);
         }
-        if(right == "SCISSORS"){
-            return defeatLookup[left] ?: "";
+        if (right == "SCISSORS") {
+            return lookupDefeat(left);
         }
         return left;
     }
