@@ -5,16 +5,16 @@ import kotlin.streams.toList
 class Day6 {
 
     companion object {
-        fun signals(lines: List<String>): List<Int> {
-            return lines.stream().map { line-> signalStart(line) }.toList()
+        fun signals(lines: List<String>, uniqueChars:Int): List<Int> {
+            return lines.stream().map { line-> signalStart(line, uniqueChars) }.toList()
         }
 
-        fun signalStart(source: String): Int {
+        fun signalStart(source: String, uniqueChars: Int): Int {
             var x = 0;
-            while (!unique(source.substring(x, x + 4))) {
+            while (!unique(source.substring(x, x + uniqueChars))) {
                 x++
             }
-            return x + 4;
+            return x + uniqueChars;
         }
 
         fun unique(source: String): Boolean {
@@ -25,5 +25,6 @@ class Day6 {
 
 fun main(args: Array<String>) {
     val input = Day6::class.java.getResourceAsStream("/day6/input.txt")?.bufferedReader()?.readLines()
-    println(Day6.signals(input!!))
+    println(Day6.signals(input!!, 4))
+    println(Day6.signals(input, 14))
 }

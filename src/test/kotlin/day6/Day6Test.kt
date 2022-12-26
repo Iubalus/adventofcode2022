@@ -7,10 +7,10 @@ class Day6Test {
 
     @Test
     fun canFindSignalInStream() {
-        assertEquals(5, Day6.signalStart("bvwbjplbgvbhsrlpgdmjqwftvncz"))
-        assertEquals(6, Day6.signalStart("nppdvjthqldpwncqszvftbrmjlhg"))
-        assertEquals(10, Day6.signalStart("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg"))
-        assertEquals(11, Day6.signalStart("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw"))
+        assertEquals(5, Day6.signalStart("bvwbjplbgvbhsrlpgdmjqwftvncz", 4))
+        assertEquals(6, Day6.signalStart("nppdvjthqldpwncqszvftbrmjlhg", 4))
+        assertEquals(10, Day6.signalStart("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 4))
+        assertEquals(11, Day6.signalStart("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 4))
     }
 
     @Test
