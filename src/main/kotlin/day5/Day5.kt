@@ -43,7 +43,7 @@ class Day5 {
         }
 
         fun parseCommands(lines: List<String>): List<Command> {
-            return return lines.stream().filter { l -> l.contains("move") }.map { l -> Command(l) }.toList();
+            return lines.stream().filter { l -> l.contains("move") }.map { l -> Command(l) }.toList();
         }
     }
 
@@ -53,7 +53,7 @@ class Day5 {
         fun takeFrom(boxes: Int): String {
             val taken = this.content.substring(this.content.length - boxes)
             this.content = this.content.substring(0, this.content.length - boxes)
-            return taken.reversed();
+            return taken.reversed();//commenting out the reversed solves part 2, but I didn't feel like wiring this feature through so I didn't
         }
 
         fun addTo(boxes: String) {
