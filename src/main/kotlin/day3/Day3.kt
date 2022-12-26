@@ -1,7 +1,5 @@
 package day3
 
-import day2.Day2
-
 class Day3 {
 
     val scores: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -26,7 +24,7 @@ class Day3 {
 }
 
 fun main(args: Array<String>) {
-    val input = Day2::class.java.getResourceAsStream("/day3/input.txt")?.bufferedReader()?.readLines()
+    val input = Day3::class.java.getResourceAsStream("/day3/input.txt")?.bufferedReader()?.readLines()
     println(Day3().scoreRucksacks(input ?: listOf("")))
 }
 
