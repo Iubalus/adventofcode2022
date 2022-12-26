@@ -4,10 +4,10 @@ class Day4 {
 
     companion object {
 
-        fun countPairs(lines: List<String>): Int {
+        fun countPairs(lines: List<String>, criteria: (left: Pair<Int, Int>, right: Pair<Int, Int>) -> Boolean): Int {
             return lines
                 .map { l -> l.split(",") }
-                .count { v -> isContained(toPair(v[0]), toPair(v[1])) }
+                .count { v -> criteria(toPair(v[0]), toPair(v[1])) }
         }
 
         fun toPair(value: String): Pair<Int, Int> {
@@ -24,12 +24,27 @@ class Day4 {
             }
             return false;
         }
+
+        private fun rangeContains(range: Pair<Int, Int>, point: Int):Boolean{
+            return point >= range.first && point <= range.second;
+        }
+
+        fun anyOverlap(left: Pair<Int, Int>, right: Pair<Int, Int>): Boolean {
+            if (rangeContains(right, left.first) || rangeContains(right, left.second)) {
+                return true;
+            }
+            if (rangeContains(left, right.first) || rangeContains(left, right.second)) {
+                return true;
+            }
+            return false;
+        }
     }
 
 }
 
 fun main(args: Array<String>) {
     val input = Day4::class.java.getResourceAsStream("/day4/input.txt")?.bufferedReader()?.readLines()
-    println(Day4.countPairs(input ?: listOf("")))
+    println(Day4.countPairs(input ?: listOf(""), Day4::isContained))
+    println(Day4.countPairs(input ?: listOf(""), Day4::anyOverlap))
 }
 

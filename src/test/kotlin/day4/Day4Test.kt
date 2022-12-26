@@ -25,6 +25,17 @@ class Day4Test {
     }
 
     @Test
+    fun testAnyOverlap() {
+        assertFalse(Day4.anyOverlap(Pair(0, 0), Pair(1, 1)))
+        assertFalse(Day4.anyOverlap(Pair(1, 1), Pair(0, 0)))
+        assertTrue(Day4.anyOverlap(Pair(0, 1), Pair(1, 2)))
+        assertTrue(Day4.anyOverlap(Pair(1, 2), Pair(0, 1)))
+        assertTrue(Day4.anyOverlap(Pair(0, 0), Pair(0, 0)))
+        assertTrue(Day4.anyOverlap(Pair(0, 5), Pair(2, 3)))
+        assertTrue(Day4.anyOverlap(Pair(2, 3), Pair(0, 5)))
+    }
+
+    @Test
     fun integration() {
         assertEquals(
             2,
@@ -36,7 +47,8 @@ class Day4Test {
                     "2-8,3-7",
                     "6-6,4-6",
                     "2-6,4-8"
-                )
+                ),
+                Day4::isContained
             )
         )
     }
